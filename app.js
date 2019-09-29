@@ -6,7 +6,7 @@ var cors = require('cors');
 var indexRouter = require('./routes/index');
 var appsRouter = require('./routes/apps');
 var sixRouter = require('./routes/six');
-var todosRouter = require('./routes/todos');
+var reviewsRouter = require('./routes/reviews');
 
 var app = express();
 
@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter)
 app.use('/api/6', sixRouter)
 app.use('/api/apps', appsRouter);
-app.use('/api/todos', todosRouter);
+app.use('/api/reviews', reviewsRouter);
 
 
 // catch 404 and forward to error handler

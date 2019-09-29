@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Todos, Helpers } = require("../db");
+const { Reviews, Todos, Helpers } = require("../db");
 
 router.get('/', async (req, res, next) => {
   const queryParams = req.query;
@@ -16,24 +16,23 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-  const newTodo = {
+  const newReview = {
     id: Helpers.genId(),
     ...req.body
   }
-  const expectedProps = ["owner", "text"];
-  const missingProps = Helpers.missingProps(expectedProps, newTodo)
 
-  if (missingProps.length) {
-    return res.status(400).json({
-      payload: `Expected valid values for todo [${missingProps}]`,
-      err: true
-    })
+  const expectedFields = ["app_id", "film_id", "reviewer_username", "text"];
+  const missingFields = Helpers.missingFields(expectedFields, newReview)
+
+  if (missingFields.length) {
+    const err = `Expected valid values for review [${missingFields}]`
+    return next(err);
   }
 
   try {
-    const todo = await Todos.createTodo(newTodo);
+    const review = await Reviews.create(newReview);
     res.status(201).json({
-      payload: todo,
+      payload: review,
       err: false
     })
   } catch (err) {

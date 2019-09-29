@@ -42,14 +42,16 @@ const getTodo = async (id) => {
   }
 }
 
-const createTodo = async (todo) => {
-  let newTodo;
+const create = async (review) => {
+  let newReview;
   try {
-    newTodo = await db.one(`INSERT INTO todos(id, owner, text) 
-      VALUES($/id/, $/owner/, $/text/) RETURNING *`, todo)
-    return newTodo;
+    newReview = await db.one(
+      `INSERT INTO reviews(id, app_id, film_id, reviewer_username, text) 
+      VALUES($/id/, $/app_id/, $/film_id/, $/reviewer_username/, $/text/) 
+      RETURNING *`, review)
+    return newReview;
   } catch (err) {
-    let customErr = `owner '${todo.owner}' doesn't exist.`
+    let customErr = `App with id: '${review.app_id}' doesn't exist.`
     if (err.code === "23503") {
       err = customErr
     }
@@ -103,7 +105,7 @@ const updateTodo = async (id, todoEdits) => {
 module.exports = {
   getAllTodos,
   getTodo,
-  createTodo, 
+  create, 
   removeTodo,
   updateTodo,
 };
