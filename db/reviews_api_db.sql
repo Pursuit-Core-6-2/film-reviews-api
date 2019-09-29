@@ -1,10 +1,10 @@
-DROP DATABASE IF EXISTS films_reviews_api_db;
-CREATE DATABASE films_reviews_api_db;
+-- DROP DATABASE IF EXISTS films_reviews_api_db;
+-- CREATE DATABASE films_reviews_api_db;
 
-\c films_reviews_api_db;
+-- \c films_reviews_api_db;
 
--- DROP TABLE IF EXISTS reviews CASCADE; 
--- DROP TABLE IF EXISTS apps CASCADE; 
+DROP TABLE IF EXISTS reviews CASCADE; 
+DROP TABLE IF EXISTS apps CASCADE; 
 
 CREATE TABLE apps (
   id VARCHAR PRIMARY KEY,
