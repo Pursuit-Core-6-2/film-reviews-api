@@ -1,6 +1,6 @@
 const uuidv1 = require('uuid/v1')
 
-let missingProps = (expected, actual) => {
+let missingFields = (expected, actual) => {
   let missing = [];
   for (let key of expected) {
     if (!actual[key]) {
@@ -16,6 +16,6 @@ let genId = () => {
 }
 
 module.exports = {
-  missingProps,
+  missingFields,
   genId
 }
