@@ -27,7 +27,7 @@ const getByOwnerEmail = async (email) => {
   } catch (err) {
     if (err instanceof errors.QueryResultError) {
       if (err.code === errors.queryResultErrorCode.noData) {
-        const error = "App not found."
+        const error = `No App registered with ${email}.`
         throw error;
       }
     }
