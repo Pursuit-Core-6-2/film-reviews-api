@@ -60,13 +60,13 @@ directory. To create a Heroku app and automatically add a `heroku` remote to you
     ```sh
     git push heroku feature_branch:master
     ```
-5. To test the API using Postman create a Postman environment and add the environment variable `server_address`. Set it's value to the url heroku gave your app e.g. `https://fsw62-films-reviews-api.herokuapp.com`. More on this [here](https://learning.getpostman.com/docs/postman/environments_and_globals/intro_to_environments_and_globals/).
+5. To test the API using Postman create a Postman environment and add the environment variable `server_address`. Set it's value to the url heroku gave your app e.g. `https://films-reviews.herokuapp.com`. More on this [here](https://learning.getpostman.com/docs/postman/environments_and_globals/intro_to_environments_and_globals/).
 
     Test the API with this Postman collection. Click to Download: 
     
     [![Run in Postman](https://run.pstmn.io/button.svg)](TODO) 
 
-6. Once verified what everything works share the url with the class and let them play with it. Your url should look something similar to: `https://fsw62-film-reviews-api.herokuapp.com`
+6. Once verified what everything works share the url with the class and let them play with it. Your url should look something similar to: `https://films-reviews.herokuapp.com`
 
 ## API Docs
 
