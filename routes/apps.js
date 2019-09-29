@@ -1,26 +1,26 @@
 let express = require('express');
 let router = express.Router();
-let { Users, Helpers } = require('../db');
+let { Apps, Helpers } = require('../db');
 
-router.post("/signup", async (req, res, next) => {
-  const { username } = req.body;
-  if (!username) {
-    return res.status(400).json({
-      payload: `Expected valid values for user [username]`,
-      err: true
-    })
+router.post("/register", async (req, res, next) => {
+  const expectedFields = ["owner_name", "owner_email", "app_name"]
+  const app = {
+    ...req.body,
+    app_id: Helpers.genId()
+  }
+  const missingFields = Helpers.missingFields(expectedFields, app)
+
+  if (missingFields.length) {
+    const err = `Expected valid values for app [${missingFields}]`
+    return next(err);
   }
 
   try {
-    let user = {
-      username,
-    };
-
-    let registeredUser = await Users.createUser(user);
+    let registeredApp = await Apps.createApp(app);
     res.status(201).json({
       payload: {
-        user: registeredUser,
-        msg: "User created",
+        app: registeredApp,
+        msg: "App registered",
       },
       err: false
     })

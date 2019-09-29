@@ -1,10 +1,10 @@
-const Users = require('./users');
+const Apps = require('./apps');
 const Todos = require('./todos');
 const Winners = require('./winners');
 const Helpers = require('./helpers');
 
 module.exports = {
-  Users,
+  Apps,
   Todos,
   Winners,
   Helpers

@@ -1,14 +1,16 @@
 const { db, errors } = require('./pgp');
 
-const createUser = async (user) => {
+const createApp = async (app) => {
   try {
-    let insertQuery = `INSERT INTO users(username) VALUES($/username/) RETURNING *`;
-    let newUser = await db.one(insertQuery, user)
-    return newUser;
+    let insertQuery = 
+      `INSERT INTO apps(id, owner_email, owner_name, app_name) 
+       VALUES($/app_id/, $/owner_email/, $/owner_name/, $/app_name/) RETURNING *`;
+    let newApp = await db.one(insertQuery, app)
+    return newApp;
   } catch (err) {
-    // Username already taken 
+    // owner_email already in use 
     if (err.code === "23505" && err.detail.includes("already exists")) {
-      let customErr = "Username not available. Please try a different one.";
+      let customErr = "Email already in use. It seems that the owner email you are trying use is already registered with an app. If you forgot the email you used to register your app contact the API developer.";
       err = customErr;
       throw customErr;
     }
@@ -66,7 +68,7 @@ const getAll = async () => {
 }
 
 module.exports = {
-  createUser,
+  createApp,
   getUserByUsername,
   getUserById,
   awardPoints,
