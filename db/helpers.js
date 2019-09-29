@@ -11,8 +11,7 @@ let missingFields = (expected, actual) => {
 }
 
 let genId = () => {
-  let id = uuidv1();
-  return id.split('-')[0];
+  return uuidv1();
 }
 
 module.exports = {
