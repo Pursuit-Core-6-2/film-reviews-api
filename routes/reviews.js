@@ -3,15 +3,19 @@ const router = express.Router();
 const { Reviews, Todos, Helpers } = require("../db");
 
 router.get('/', async (req, res, next) => {
-  const queryParams = req.query;
-  const expectedFields = ["film_id", "app_id"];
-  const missingFields = Helpers.missingFields(expectedFields, queryParams)
+  const expectedFields = ["film-id", "app-id"];
+  const missingFields = Helpers.missingFields(expectedFields, req.query)
 
   if (missingFields.length) {
     const err = `Expected query params [${missingFields}]`
     return next(err)
   }
 
+  const queryParams = {
+    film_id: req.query["film-id"],
+    app_id: req.query["app-id"]
+  }
+  
   try {
     const reviews = await Reviews.getAll(queryParams);
     res.json({
