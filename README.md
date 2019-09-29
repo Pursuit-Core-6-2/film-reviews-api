@@ -77,16 +77,16 @@ directory. To create a Heroku app and automatically add a `heroku` remote to you
 ### Endpoints
 
 #### Apps
-| Method | Endpoint                 | Possible Query Params | Use                             | 
+| Method | Endpoint                 | Query Params          | Use                             | 
 |--------|--------------------------|-----------------------|---------------------------------|
 | `POST` | `/apps/register`         || Register an app to be granted access to the API. This endpoint will assign your app and `id` that will need to be used for subsequent requests when storing film reviews. Body data must contain `owner_name` (your name), `owner_email`(your pursuit email) and `app_name` (a name for your app).
 | `GET`  | `/apps/<owner-email>`    || Use to retrieve your App id `by` using the email you registered the app with.
 
 #### reviews
-| Method   | Endpoint           | Possible Query Params | Use                             | 
+| Method   | Endpoint           | Query Params          | Use                             | 
 |----------|--------------------|-----------------------|---------------------------------|
 | `POST`   | `/reviews`         || Add a new review. Body data must contain `app_id`, `film_id`, `reviewer_username` and `text`
-| `GET`    | `/reviews`         | `film-id=<film-id>`,
+| `GET`    | `/reviews`         | `film-id`, `app-id`
 | `GET`    | `/reviews/<review-id>` || TODO
 | `PUT`    | `/reviews/<review-id>` || TODO
 | `PATCH`  | `/reviews/<review-id>` || TODO
