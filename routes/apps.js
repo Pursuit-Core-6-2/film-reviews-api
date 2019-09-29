@@ -1,6 +1,6 @@
 let express = require('express');
 let router = express.Router();
-let { Apps, Helpers } = require('../db');
+let { Apps, Users, Helpers } = require('../db');
 
 router.post("/register", async (req, res, next) => {
   const expectedFields = ["owner_name", "owner_email", "app_name"]
@@ -50,13 +50,12 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:username', async (req, res, next) => {
-  let { username } = req.params
+router.get('/:owner_email', async (req, res, next) => {
+  let { owner_email } = req.params
   try {
-    const user = await Users.getUserByUsername(username);
-    if (!user) { return next(user) }
+    const app = await Apps.getByOwnerEmail(owner_email);
     res.json({
-      payload: user,
+      payload: app,
       err: false
     })
   } catch (err) {

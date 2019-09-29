@@ -18,16 +18,17 @@ const createApp = async (app) => {
   }
 }
 
-const getUserByUsername = async (username) => {
+const getByOwnerEmail = async (email) => {
   try {
-    let user = await db.one('SELECT * FROM users WHERE username = $/username/', {
-      username
+    let app = await db.one('SELECT * FROM apps WHERE owner_email = $/email/', {
+      email
     });
-    return user;
+    return app;
   } catch (err) {
     if (err instanceof errors.QueryResultError) {
       if (err.code === errors.queryResultErrorCode.noData) {
-        return false;
+        const error = "App not found."
+        throw error;
       }
     }
     throw err;
@@ -69,7 +70,7 @@ const getAll = async () => {
 
 module.exports = {
   createApp,
-  getUserByUsername,
+  getByOwnerEmail,
   getUserById,
   awardPoints,
   getAll
