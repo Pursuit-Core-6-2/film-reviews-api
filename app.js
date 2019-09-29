@@ -5,7 +5,6 @@ var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var appsRouter = require('./routes/apps');
-var sixRouter = require('./routes/six');
 var reviewsRouter = require('./routes/reviews');
 
 var app = express();
@@ -17,7 +16,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter)
-app.use('/api/6', sixRouter)
 app.use('/api/apps', appsRouter);
 app.use('/api/reviews', reviewsRouter);
 
