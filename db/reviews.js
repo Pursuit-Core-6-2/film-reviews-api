@@ -5,22 +5,11 @@ const optionalCol = col => ({
   skip: (col) => col.value === null || col.value === undefined || !col.exists
 })
 
-const getAllTodos = async (params) => {
-  let { owner, completed } = params
-  let SQL = "SELECT * FROM todos"
-
-  if (owner && completed) {
-    SQL += " WHERE owner = $/owner/ AND completed = $/completed/"
-  } else if (owner) {
-    SQL += " WHERE owner = $/owner/"
-  } else if (completed) {
-    SQL += " WHERE completed = $/completed/"
-  }
-
-  let todos;
+const getAll = async (params) => {
   try {
-    todos = await db.any(SQL, params);
-    return todos;
+    const SQL = "SELECT * FROM reviews WHERE film_id = $/film_id/ AND app_id = $/app_id/"
+    const reviews = await db.any(SQL, params);
+    return reviews;
   } catch (err) {
     throw err;
   }
@@ -103,7 +92,7 @@ const updateTodo = async (id, todoEdits) => {
 }
 
 module.exports = {
-  getAllTodos,
+  getAll,
   getTodo,
   create, 
   removeTodo,
